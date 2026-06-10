@@ -2,7 +2,7 @@
 // CONFIGURATION: PASTE YOUR COMPLETED STAGE URL HERE
 // ==========================================
 // Example: "https://a1b2c3d4e5.execute-api.us-east-1.amazonaws.com/chat"
-const API_URL = "YOUR_API_GATEWAY_INVOKE_URL/chat";
+const API_URL = "https://ahpcgx6peg.execute-api.us-east-1.amazonaws.com/chat";
 
 async function sendMessage() {
     const inputElement = document.getElementById('userInput');
