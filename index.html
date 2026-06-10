@@ -3,29 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serverless AI Assistant</title>
+    <title>AI Core - Serverless Workspace</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="chat-container">
-        <!-- Header Window Bar -->
-        <div class="window-header">
-            <div class="status-indicator"></div>
-            <span>Core Assistant (Amazon Nova Engine)</span>
-        </div>
-
-        <!-- Chat Output Dynamic Viewport -->
-        <div class="chat-box" id="chatBox">
-            <div class="msg bot">
-                Hello! I am connected and ready. You can ask me to write advanced code snippets, or type <strong>/image [prompt]</strong> to synthesize custom visual assets.
+    <div class="app-layout">
+        <div class="chat-container">
+            <div class="window-header">
+                <div class="header-left">
+                    <div class="status-glow">
+                        <div class="status-core"></div>
+                    </div>
+                    <div class="brand-meta">
+                        <h1 class="engine-title">Core Assistant</h1>
+                        <span class="engine-badge">Amazon Nova Engine</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <span class="creator-tag">Crafted by somaswain</span>
+                </div>
             </div>
-        </div>
 
-        <!-- Static Input Action Area -->
-        <div class="input-bar">
-            <input type="text" id="userInput" placeholder="Type a message or /image followed by a prompt..." onkeydown="if(event.key==='Enter') sendMessage()">
-            <button onclick="sendMessage()" id="sendBtn">Send</button>
+            <div class="chat-box" id="chatBox">
+                <div class="msg bot">
+                    <div class="msg-content">
+                        Hello! The modern pipeline is fully active. You can prompt me to write advanced code snippets, or type <span class="cmd-pill">/image [prompt]</span> to synthesize custom visual assets natively.
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <div class="input-bar">
+                    <input type="text" id="userInput" placeholder="Ask anything or generate with /image..." onkeydown="if(event.key==='Enter') sendMessage()">
+                    <button onclick="sendMessage()" id="sendBtn" aria-label="Send Message">
+                        <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
