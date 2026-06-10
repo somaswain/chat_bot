@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI Core - Serverless Workspace</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,14 +31,31 @@
             <div class="chat-box" id="chatBox">
                 <div class="msg bot">
                     <div class="msg-content">
-                        Hello! The modern pipeline is fully active. You can prompt me to write advanced code snippets, or type <span class="cmd-pill">/image [prompt]</span> to synthesize custom visual assets natively.
+                        Hello! The modern pipeline is fully active. You can prompt me to write advanced code snippets, type <span class="cmd-pill">/image [prompt]</span> to generate images, or use the <span class="cmd-pill">📎</span> button to upload a file for analysis.
                     </div>
                 </div>
             </div>
 
+            <!-- File preview bar (shown when a file is attached) -->
+            <div class="file-preview-bar" id="filePreviewBar" style="display:none;">
+                <div class="file-preview-info">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                    <span id="filePreviewName">file.txt</span>
+                </div>
+                <button class="file-remove-btn" onclick="removeAttachedFile()" aria-label="Remove file">✕</button>
+            </div>
+
             <div class="input-wrapper">
                 <div class="input-bar">
-                    <input type="text" id="userInput" placeholder="Ask anything or generate with /image..." onkeydown="if(event.key==='Enter') sendMessage()">
+                    <!-- Hidden file input -->
+                    <input type="file" id="fileInput" style="display:none;" onchange="handleFileSelect(event)" accept=".txt,.pdf,.csv,.json,.md,.py,.js,.html,.css,.xml,.yaml,.yml,.log">
+                    <!-- Attach button -->
+                    <button class="attach-btn" onclick="document.getElementById('fileInput').click()" aria-label="Attach file" title="Attach a file">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                        </svg>
+                    </button>
+                    <input type="text" id="userInput" placeholder="Ask anything or use /image [prompt]..." onkeydown="if(event.key==='Enter') sendMessage()">
                     <button onclick="sendMessage()" id="sendBtn" aria-label="Send Message">
                         <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="22" y1="2" x2="11" y2="13"></line>

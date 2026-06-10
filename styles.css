@@ -26,10 +26,15 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     overflow: hidden;
     background-image: 
         radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+}
+
+html {
+    height: -webkit-fill-available;
 }
 
 .app-layout {
@@ -37,6 +42,7 @@ body {
     max-width: 900px;
     padding: 20px;
     height: 100vh;
+    height: -webkit-fill-available;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,6 +68,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .header-left {
@@ -75,6 +82,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .status-core {
@@ -105,6 +113,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .engine-title {
@@ -133,12 +142,14 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     opacity: 0.8;
+    white-space: nowrap;
 }
 
 .chat-box {
     flex: 1;
-    padding: 30px;
+    padding: 24px 28px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -171,6 +182,8 @@ body {
     font-size: 0.98rem;
     line-height: 1.55;
     word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .user {
@@ -186,12 +199,27 @@ body {
 .bot {
     align-self: flex-start;
     width: 100%;
+    max-width: 100%;
 }
 .bot .msg-content {
     background: var(--bg-card);
     color: var(--text-primary);
     border-bottom-left-radius: 4px;
     border: 1px solid var(--border-color);
+}
+
+/* File attachment message bubble */
+.file-attached-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    color: #a5b4fc;
+    margin-bottom: 6px;
 }
 
 .cmd-pill {
@@ -228,26 +256,120 @@ body {
     50% { opacity: 1; }
 }
 
+/* ── File preview bar ── */
+.file-preview-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+    background: rgba(99, 102, 241, 0.08);
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+    flex-shrink: 0;
+}
+
+.file-preview-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #a5b4fc;
+}
+
+.file-remove-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.85rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+    padding: 0;
+}
+
+.file-remove-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    transform: none;
+}
+
+/* ── Downloadable link style ── */
+.download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #34d399;
+    padding: 8px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.download-link:hover {
+    background: rgba(16, 185, 129, 0.2);
+}
+
+/* ── Input area ── */
 .input-wrapper {
-    padding: 24px 30px 30px 30px;
+    padding: 16px 20px 20px 20px;
     background: rgba(13, 18, 31, 0.85);
     backdrop-filter: blur(8px);
+    flex-shrink: 0;
 }
 
 .input-bar {
     background: var(--bg-input);
     border: 1px solid var(--border-color);
     border-radius: 16px;
-    padding: 6px 8px 6px 18px;
+    padding: 6px 8px 6px 8px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     transition: all 0.2s ease;
 }
 
 .input-bar:focus-within {
     border-color: rgba(99, 102, 241, 0.6);
     box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* Attach button */
+.attach-btn {
+    height: 38px;
+    width: 38px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.attach-btn:hover {
+    background: rgba(99, 102, 241, 0.15);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: none;
+}
+
+.attach-btn.has-file {
+    background: rgba(99, 102, 241, 0.2);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.4);
 }
 
 input[type="text"] {
@@ -258,7 +380,8 @@ input[type="text"] {
     color: var(--text-primary);
     font-size: 0.98rem;
     font-family: var(--font-sans);
-    padding: 10px 0;
+    padding: 10px 4px;
+    min-width: 0;
 }
 
 input[type="text"]::placeholder {
@@ -277,6 +400,7 @@ button {
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
 button:hover {
@@ -330,4 +454,84 @@ img.generated-image {
     text-transform: uppercase;
     letter-spacing: 0.8px;
     font-weight: 600;
+}
+
+/* ═══════════════════════════════════
+   MOBILE RESPONSIVE STYLES
+   ═══════════════════════════════════ */
+
+@media (max-width: 600px) {
+    .app-layout {
+        padding: 0;
+        height: 100vh;
+        height: -webkit-fill-available;
+        align-items: stretch;
+    }
+
+    .chat-container {
+        height: 100vh;
+        height: -webkit-fill-available;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+
+    .window-header {
+        padding: 14px 16px;
+    }
+
+    .engine-badge {
+        display: none; /* hide on very small screens to save space */
+    }
+
+    .creator-tag {
+        font-size: 0.72rem;
+    }
+
+    .chat-box {
+        padding: 16px 14px;
+        gap: 14px;
+    }
+
+    .msg {
+        max-width: 88%;
+    }
+
+    .msg-content {
+        font-size: 0.93rem;
+        padding: 12px 14px;
+    }
+
+    .input-wrapper {
+        padding: 10px 12px 16px 12px;
+        /* Push above iOS safe-area / home bar */
+        padding-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+
+    .input-bar {
+        border-radius: 14px;
+    }
+
+    input[type="text"] {
+        font-size: 16px; /* prevents iOS auto-zoom on focus */
+    }
+
+    pre-code {
+        font-size: 0.8rem;
+        padding: 12px 14px;
+    }
+
+    img.generated-image {
+        max-width: 100%;
+    }
+
+    .file-preview-bar {
+        padding: 8px 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .engine-title {
+        font-size: 0.95rem;
+    }
 }
