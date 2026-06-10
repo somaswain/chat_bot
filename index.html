@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serverless AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="chat-container">
+        <!-- Header Window Bar -->
+        <div class="window-header">
+            <div class="status-indicator"></div>
+            <span>Core Assistant (Amazon Nova Engine)</span>
+        </div>
+
+        <!-- Chat Output Dynamic Viewport -->
+        <div class="chat-box" id="chatBox">
+            <div class="msg bot">
+                Hello! I am connected and ready. You can ask me to write advanced code snippets, or type <strong>/image [prompt]</strong> to synthesize custom visual assets.
+            </div>
+        </div>
+
+        <!-- Static Input Action Area -->
+        <div class="input-bar">
+            <input type="text" id="userInput" placeholder="Type a message or /image followed by a prompt..." onkeydown="if(event.key==='Enter') sendMessage()">
+            <button onclick="sendMessage()" id="sendBtn">Send</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
